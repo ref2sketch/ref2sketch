@@ -1,16 +1,29 @@
-### Hi there 👋
+#### Title
+[Reference based sketch extraction via attention mechanism]
 
-<!--
-**ref2sketch/ref2sketch** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
 
-Here are some ideas to get you started:
 
-- 🔭 I’m currently working on ...
-- 🌱 I’m currently learning ...
-- 👯 I’m looking to collaborate on ...
-- 🤔 I’m looking for help with ...
-- 💬 Ask me about ...
-- 📫 How to reach me: ...
-- 😄 Pronouns: ...
-- ⚡ Fun fact: ...
--->
+        
+## Train
+    $ python main.py --mode train_deep \
+                     --scope ref2sketch \
+                     --name_data examples \
+                     --dir_data ./datasets \
+                     --dir_log ./log \
+                     --dir_checkpoint ./checkpoint \
+                     --direction A2B
+                     --gpu_ids 0
+
+* Set **[scope name]** uniquely.
+* For settings from original paper, use 'train' for --mode. However we recommend use 'train_deep' for producing better quality of model with deeper convolution layers.
+* To understand hierarchy of directories based on their arguments, see **directories structure** below. 
+
+
+## Test
+    $ python test.py --name_weight test \
+                     --name_data examples \
+                     --direction A2B \
+                     --cuda
+
+
+
