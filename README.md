@@ -2,7 +2,6 @@
 [Reference based sketch extraction via attention mechanism]
 
 
-
         
 ## Train
     $ python main.py --mode train_deep \
@@ -19,7 +18,7 @@
 
 
 ## Test
-    $ python test.py --name_weight test \
+    $ python test.py --name_weight [weight_file] \
                      --name_data examples \
                      --direction A2B \
                      --cuda
