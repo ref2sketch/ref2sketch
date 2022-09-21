@@ -14,9 +14,8 @@
                      --direction A2B
                      --gpu_ids 0
 
-* Set **[scope name]** uniquely.
-* For settings from original paper, use 'train' for --mode. However we recommend use 'train_deep' for producing better quality of model with deeper convolution layers.
-* To understand hierarchy of directories based on their arguments, see **directories structure** below. 
+* For settings from original paper, use 'train' for --mode. However we recommend to use 'train_deep' for producing better quality of model with deeper convolution layers.
+* To understand hierarchy of dataset, see **Dataset directories structure** below. 
 
 
 ## Test
@@ -27,3 +26,26 @@
 
 
 
+## Dataset directories structure
+    ref2sketch
+    +---[dir_data]
+    |   \---[name_data]
+    |       +---test
+    |       |   +---a
+    |       |       |   +---test_input1.png
+    |       |       |   +---test_input2.png
+    |       |   +---b
+    |       |       |   +---train_groundtruth1.png #not necessary for testing
+    |       |       |   +---train_groundtruth1.png #not necessary for testing
+    |       |   +---c
+    |       |       |   +---style1.png
+    |       |       |   +---style1.png
+    |       +---train
+    |       |   +---a
+    |       |       |   +---train_input1.png
+    |       |       |   +---train_input2.png
+    |       |   +---b
+    |       |       |   +---train_groundtruth1.png
+    |       |       |   +---train_groundtruth2.png
+
+---
