@@ -36,10 +36,10 @@
     |       |       |   +---test_input2.png
     |       |   +---b
     |       |       |   +---train_groundtruth1.png #not necessary for testing
-    |       |       |   +---train_groundtruth1.png #not necessary for testing
+    |       |       |   +---train_groundtruth2.png #not necessary for testing
     |       |   +---c
     |       |       |   +---style1.png
-    |       |       |   +---style1.png
+    |       |       |   +---style2.png
     |       +---train
     |       |   +---a
     |       |       |   +---train_input1.png
