@@ -23,6 +23,13 @@
                      --direction A2B \
                      --cuda
 
+* Download the pretrained model from google drive
+https://drive.google.com/drive/folders/1OvU4pPVTFk07Kp5qKS6MNlsKhoUUckcR?usp=sharing
+* Pretrained model "ref2sketch" produce results same as experiment on paper, however we recommend to use "ref2sketch_deep" for better quality output.
+
+
+## Dataset
+* Due to the regulation of twitter, we share the url of twitter dataset used in paper. You can find twitter_dataset.json file from dataset folder.
 
 
 ## Dataset directories structure
