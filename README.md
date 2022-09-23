@@ -1,6 +1,9 @@
 #### Title
-##Reference based sketch extraction via attention mechanism
+
+## Reference based sketch extraction via attention mechanism
+
 Journal: ACM TOG
+
 Conference: SIGGRAPH ASIA 2022
 
         
