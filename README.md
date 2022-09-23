@@ -1,5 +1,3 @@
-#### Title
-
 ## Reference based sketch extraction via attention mechanism
 
 Journal: ACM TOG
