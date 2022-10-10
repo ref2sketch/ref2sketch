@@ -57,5 +57,7 @@ https://developer.twitter.com/en/developer-terms/agreement-and-policy
     |       |   +---b
     |       |       |   +---train_groundtruth1.png
     |       |       |   +---train_groundtruth2.png
+    
+    #Paired input and groundtruth should have same filename
 
 ---
