@@ -8,7 +8,7 @@ This is official implementation of the paper "Reference based sketch extraction 
 [PAPER] (To be appear)
 
 
-Journal: ACM TOG
+Journal: ACM TOG\
 Conference: SIGGRAPH ASIA 2022
 
 
