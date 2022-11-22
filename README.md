@@ -1,6 +1,14 @@
-#### Title
-[Reference based sketch extraction via attention mechanism]
+## Reference based sketch extraction via attention mechanism
 
+This is official implementation of the paper "Reference based sketch extraction via attention mechanism"
+
+
+[PAPER] (To be appear)
+
+
+Journal: ACM TOG
+
+Conference: SIGGRAPH ASIA 2022
 
         
 ## Train
@@ -23,7 +31,16 @@
                      --direction A2B \
                      --cuda
 
+* Download the pretrained model from google drive
+https://drive.google.com/drive/folders/1OvU4pPVTFk07Kp5qKS6MNlsKhoUUckcR?usp=sharing
+* Pretrained model "ref2sketch" produce results same as experiments on paper, however we recommend to use "ref2sketch_deep" for better quality output.
 
+
+## Dataset
+* Due to the regulation of twitter, we share each url of twitter dataset used in our paper. You can find twitter_dataset.json file from dataset folder.
+
+Twitter regulation
+https://developer.twitter.com/en/developer-terms/agreement-and-policy
 
 ## Dataset directories structure
     ref2sketch
@@ -34,13 +51,8 @@
     |       |       |   +---test_input1.png
     |       |       |   +---test_input2.png
     |       |   +---b
-<<<<<<< HEAD
-    |       |       |   +---train_groundtruth1.png #not necessary for testing
-    |       |       |   +---train_groundtruth2.png #not necessary for testing
-=======
     |       |       |   +---test_groundtruth1.png #not necessary for testing
     |       |       |   +---test_groundtruth2.png #not necessary for testing
->>>>>>> 4cb9318a3e423a6865a24140dfcf28210fb736dd
     |       |   +---c
     |       |       |   +---style1.png
     |       |       |   +---style2.png
@@ -51,5 +63,7 @@
     |       |   +---b
     |       |       |   +---train_groundtruth1.png
     |       |       |   +---train_groundtruth2.png
+    
+    #Paired input and groundtruth should have same filename
 
 ---
