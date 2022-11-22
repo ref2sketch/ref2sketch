@@ -7,64 +7,6 @@ from torch.optim import lr_scheduler
 import torch.nn.functional as F
 import numpy as np
 import random 
-class UNet(nn.Module):
-    def __init__(self, nch_in, nch_out, nch_ker=64, norm='bnorm'):
-        super(UNet, self).__init__()
-
-        self.nch_in = nch_in
-        self.nch_out = nch_out
-        self.nch_ker = nch_ker
-        self.norm = norm
-
-        if norm == 'bnorm':
-            self.bias = False
-        else:
-            self.bias = True
-
-        self.enc1 = CNR2d(1 * self.nch_in,  1 * self.nch_ker, stride=2, norm=self.norm, relu=0.2, drop=[])
-        self.enc2 = CNR2d(1 * self.nch_ker, 2 * self.nch_ker, stride=2, norm=self.norm, relu=0.2, drop=[])
-        self.enc3 = CNR2d(2 * self.nch_ker, 4 * self.nch_ker, stride=2, norm=self.norm, relu=0.2, drop=[])
-        self.enc4 = CNR2d(4 * self.nch_ker, 8 * self.nch_ker, stride=2, norm=self.norm, relu=0.2, drop=[])
-        self.enc5 = CNR2d(8 * self.nch_ker, 8 * self.nch_ker, stride=2, norm=self.norm, relu=0.2, drop=[])
-        self.enc6 = CNR2d(8 * self.nch_ker, 8 * self.nch_ker, stride=2, norm=self.norm, relu=0.2, drop=[])
-        self.enc7 = CNR2d(8 * self.nch_ker, 8 * self.nch_ker, stride=2, norm=self.norm, relu=0.2, drop=[])
-        self.enc8 = CNR2d(8 * self.nch_ker, 8 * self.nch_ker, stride=2, norm=self.norm, relu=0.0, drop=[])
-        #self.transformer = SpatialAttention(kernel_size=3)
-
-        self.dec8 = DECNR2d(1 * 8 * self.nch_ker, 8 * self.nch_ker, stride=2, norm=self.norm, relu=0.0, drop=0.5)
-        self.dec7 = DECNR2d(2 * 8 * self.nch_ker, 8 * self.nch_ker, stride=2, norm=self.norm, relu=0.0, drop=0.5)
-        self.dec6 = DECNR2d(2 * 8 * self.nch_ker, 8 * self.nch_ker, stride=2, norm=self.norm, relu=0.0, drop=0.5)
-        self.dec5 = DECNR2d(2 * 8 * self.nch_ker, 8 * self.nch_ker, stride=2, norm=self.norm, relu=0.0, drop=[])
-        self.dec4 = DECNR2d(2 * 8 * self.nch_ker, 4 * self.nch_ker, stride=2, norm=self.norm, relu=0.0, drop=[])
-        self.dec3 = DECNR2d(2 * 4 * self.nch_ker, 2 * self.nch_ker, stride=2, norm=self.norm, relu=0.0, drop=[])
-        self.dec2 = DECNR2d(2 * 2 * self.nch_ker, 1 * self.nch_ker, stride=2, norm=self.norm, relu=0.0, drop=[])
-        self.dec1 = DECNR2d(2 * 1 * self.nch_ker, 1 * self.nch_out, stride=2, norm=[],        relu=[],  drop=[], bias=False)
-
-    def forward(self, x):
-
-        enc1 = self.enc1(x)
-        enc2 = self.enc2(enc1)
-        enc3 = self.enc3(enc2)
-        enc4 = self.enc4(enc3)
-        enc5 = self.enc5(enc4)
-        enc6 = self.enc6(enc5)
-        enc7 = self.enc7(enc6)
-        enc8 = self.enc8(enc7)
-
-        dec8 = self.dec8(enc8)
-        dec7 = self.dec7(torch.cat([enc7, dec8], dim=1))
-        dec6 = self.dec6(torch.cat([enc6, dec7], dim=1))
-        dec5 = self.dec5(torch.cat([enc5, dec6], dim=1))
-        dec4 = self.dec4(torch.cat([enc4, dec5], dim=1))
-        dec3 = self.dec3(torch.cat([enc3, dec4], dim=1))
-        dec2 = self.dec2(torch.cat([enc2, dec3], dim=1))
-        dec1 = self.dec1(torch.cat([enc1, dec2], dim=1))
-
-        x = torch.tanh(dec1)
-
-        return x
-
-
 
 
 class ResNet(nn.Module):
@@ -150,42 +92,6 @@ class ResNet(nn.Module):
 
         return rcbam_xy,sparse_map
 
-
-# class SCFT(nn.Module):
-#     def __init__(self, d_channel=448):
-#         super(SCFT, self).__init__()
-        
-#         self.W_v = nn.Parameter(torch.randn(d_channel, d_channel)) # [448, 448]
-#         self.W_k = nn.Parameter(torch.randn(d_channel, d_channel)) # [448, 448]
-#         self.W_q = nn.Parameter(torch.randn(d_channel, d_channel)) # [448, 448]
-#         self.coef = d_channel ** .5
-        
-#         self.gamma = 12.
-    
-#     def forward(self, V_r, V_s):
-        
-#         wq_vs = torch.matmul(self.W_q, V_s) # [1, 448, 1024]
-#         wk_vr = torch.matmul(self.W_k, V_r).permute(0, 2, 1) # [1, 448, 1024]
-#         alpha = F.softmax(torch.matmul(wq_vs, wk_vr) / self.coef, dim=-1) # Eq.(2)
-        
-#         wv_vr = torch.matmul(self.W_v, V_r)
-#         v_asta = torch.matmul(alpha, wv_vr) # [1, 448, 1024] # Eq.(3) 
-        
-#         c_i = V_s + v_asta # [1, 448, 1024] # Eq.(4)
-        
-#         bs,c,hw = c_i.size()
-#         spatial_c_i = torch.reshape(c_i.unsqueeze(-1), (bs,c,int(hw**0.5), int(hw**0.5))) #  [1, 448, 32, 32]
-        
-#         # Similarity-Based Triplet Loss
-#         a = wk_vr[0, :, :].detach().clone()
-#         b = wk_vr[1:, :, :].detach().clone()
-#         wk_vr_neg = torch.cat((b, a.unsqueeze(0)))
-#         alpha_negative = F.softmax(torch.matmul(wq_vs, wk_vr_neg) / self.coef, dim=-1)
-#         v_negative = torch.matmul(alpha_negative, wv_vr)
-        
-#         L_tr = F.relu(-v_asta + v_negative + self.gamma).mean()
-        
-#         return spatial_c_i, L_tr
 
 
 class Discriminator(nn.Module):

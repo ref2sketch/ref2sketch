@@ -274,44 +274,47 @@ class Train:
 
             ## save
             if (epoch % num_freq_save) == 0 or epoch == 1:
+                check_out_path = "checkpoints/{}/{}/".format(self.scope,name_data)
                 net_g_model_out_path = "checkpoints/{}/{}/netG_model_epoch_{}.pth".format(self.scope,name_data, epoch)
+                if not os.path.exists(check_out_path):
+                    os.makedirs(check_out_path)
                 torch.save(netG, net_g_model_out_path)
 
 
 
-                model_path = "./checkpoints/{}/{}/netG_model_epoch_{}.pth".format(self.scope,name_data, epoch)
-                net_g = torch.load(model_path,map_location='cuda:0').to(device)
-                if self.direction == "A2B":
-                    image_dir = "datasets/{}/test/a/".format(name_data)
-                else:
-                    image_dir = "datasets/{}/test/b/".format(name_data)
+                # model_path = "./checkpoints/{}/{}/netG_model_epoch_{}.pth".format(self.scope,name_data, epoch)
+                # net_g = torch.load(model_path,map_location='cuda:0').to(device)
+                # if self.direction == "A2B":
+                #     image_dir = "datasets/{}/test/a/".format(name_data)
+                # else:
+                #     image_dir = "datasets/{}/test/b/".format(name_data)
 
-                style_test_image_dir ="datasets/{}/test/c/".format(name_data)
+                # style_test_image_dir ="datasets/{}/test/c/".format(name_data)
 
-                image_filenames = [x for x in os.listdir(image_dir) if is_image_file(x)]
-                style_test_image_dir_name = [x for x in os.listdir(style_test_image_dir) if is_image_file(x)]
+                # image_filenames = [x for x in os.listdir(image_dir) if is_image_file(x)]
+                # style_test_image_dir_name = [x for x in os.listdir(style_test_image_dir) if is_image_file(x)]
 
-                transform_list = [transforms.ToTensor(),
-                                transforms.Normalize([0.5], [0.5])]
+                # transform_list = [transforms.ToTensor(),
+                #                 transforms.Normalize([0.5], [0.5])]
                                 
 
-                transform = transforms.Compose(transform_list)
+                # transform = transforms.Compose(transform_list)
 
-                img,w,h = test_load_img(image_dir + image_filenames[0])
-                print(style_test_image_dir_name)
-                style_img = load_img(style_test_image_dir+style_test_image_dir_name[0])
+                # img,w,h = test_load_img(image_dir + image_filenames[0])
+                # print(style_test_image_dir_name)
+                # style_img = load_img(style_test_image_dir+style_test_image_dir_name[0])
 
-                img = transform(img)
-                style_img = transform(style_img)
+                # img = transform(img)
+                # style_img = transform(style_img)
                 
-                input = img.unsqueeze(0).to(device)
-                style_input = style_img.unsqueeze(0).to(device)
-                out,spatial= net_g(input,style_input)
-                out_img = out.detach().squeeze(0).cpu()
+                # input = img.unsqueeze(0).to(device)
+                # style_input = style_img.unsqueeze(0).to(device)
+                # out,spatial= net_g(input,style_input)
+                # out_img = out.detach().squeeze(0).cpu()
 
-                if not os.path.exists(os.path.join("result", name_data)):
-                    os.makedirs(os.path.join("result", name_data))
-                save_img(out_img,w,h ,"result/{}/{}".format(name_data, str(epoch)+image_filenames[0]))
+                # if not os.path.exists(os.path.join("result", name_data)):
+                #     os.makedirs(os.path.join("result", name_data))
+                # save_img(out_img,w,h ,"result/{}/{}".format(name_data, str(epoch)+image_filenames[0]))
 
         writer_train.close()
         #writer_val.close()

@@ -36,7 +36,6 @@ class Dataset(torch.utils.data.Dataset):
 
         transform_list = [transforms.ToTensor(),
                           transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5))
-                          #transforms.Normalize([0.5], [0.5]),
                           ]
 
         self.transform = transforms.Compose(transform_list)
@@ -54,14 +53,6 @@ class Dataset(torch.utils.data.Dataset):
         style = Image.fromarray(style)
 
 
-        #style.save('./aug.png','png')
-        #style.save('./aug/'+self.names_A[index],'png')
-        
-        #data_B = plt.imread(os.path.join(self.data_dir+'/c', self.names_B[index]))#[:, :, :self.nch]
-
-        #if data.dtype == np.uint8:
-        #    data = data / 255.0
-        #sz = int(data.shape[1]/2)
         trainsize = 286
         data_A = data_A.resize((trainsize, trainsize), Image.BICUBIC)
         data_B = data_B.resize((trainsize, trainsize), Image.BICUBIC)
@@ -70,6 +61,7 @@ class Dataset(torch.utils.data.Dataset):
         data_A = transforms.ToTensor()(data_A)
         data_B = transforms.ToTensor()(data_B)
         style = transforms.ToTensor()(style)
+        #random augmentations
         if random.random() <0.5:
           data_A = transforms.ColorJitter(brightness=(0.2, 2),contrast=(0.3, 2),saturation=(0.2, 2),hue=(-0.3, 0.3))(data_A)
         data_A = transforms.Grayscale()(data_A)
@@ -81,8 +73,6 @@ class Dataset(torch.utils.data.Dataset):
           data_B = torch.flipud(data_B)
           style = torch.flipud(style)
 
-        #data_A=np.array(data_A)
-        #data_B=np.array(data_B)
         w_offset = random.randint(0, max(0, trainsize - 256 - 1))
         h_offset = random.randint(0, max(0, trainsize - 256 - 1))
         data_A = data_A[:, h_offset:h_offset + 256, w_offset:w_offset + 256]
@@ -107,8 +97,6 @@ class Dataset(torch.utils.data.Dataset):
         else:
             data = {'dataA': data_B, 'dataB': data_A,  'dataC':style}
 
-        #if self.transform:
-        #    data = self.transform(data)
 
         return data
 
@@ -120,22 +108,10 @@ class ToTensor(object):
     """Convert ndarrays in sample to Tensors."""
 
     def __call__(self, data):
-        # Swap color axis because numpy image: H x W x C
-        #                         torch image: C x H x W
-
-        # for key, value in data:
-        #     data[key] = torch.from_numpy(value.transpose((2, 0, 1)))
-        #
-        # return data
         dataA, dataB, dataC = data['dataA'], data['dataB'], data['dataC']
         dataA = dataA[:,:,np.newaxis]
         dataB = dataB[:,:,np.newaxis]
         dataC = dataC[:,:,np.newaxis]
-
-        #dataA = np.repeat(dataA,3,axis=2)
-        #print(dataA.shape)
-        #dataC = dataC[:,:,np.newaxis]
-        #dataC = np.repeat(dataC,3,axis=2)
 
         dataA = dataA.transpose((2, 0, 1)).astype(np.float32)
         dataB = dataB.transpose((2, 0, 1)).astype(np.float32)
@@ -213,9 +189,6 @@ class Rescale(object):
 
     new_h, new_w = int(new_h), int(new_w)
 
-    # dataA = transform.resize(dataA, (new_h, new_w))
-    # dataB = transform.resize(dataB, (new_h, new_w))
-    # dataC = transform.resize(dataC, (new_h, new_w))
 
     return {'dataA': dataA, 'dataB': dataB, 'dataC':dataC}
 
@@ -256,34 +229,13 @@ class ToNumpy(object):
     """Convert ndarrays in sample to Tensors."""
 
     def __call__(self, data):
-        # Swap color axis because numpy image: H x W x C
-        #                         torch image: C x H x W
-
-        # for key, value in data:
-        #     data[key] = value.transpose((2, 0, 1)).numpy()
-        #
-        # return data
 
         return data.to('cpu').detach().numpy().transpose(0, 2, 3, 1)
 
-        # input, label = data['input'], data['label']
-        # input = input.transpose((2, 0, 1))
-        # label = label.transpose((2, 0, 1))
-        # return {'input': input.detach().numpy(), 'label': label.detach().numpy()}
 
 
 class Denomalize(object):
     def __call__(self, data):
-        # Denomalize [-1, 1] => [0, 1]
-
-        # for key, value in data:
-        #     data[key] = (value + 1) / 2 * 255
-        #
-        # return data
 
         return (data + 1) / 2
 
-        # input, label = data['input'], data['label']
-        # input = (input + 1) / 2 * 255
-        # label = (label + 1) / 2 * 255
-        # return {'input': input, 'label': label}
