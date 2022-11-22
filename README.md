@@ -77,8 +77,6 @@ https://developer.twitter.com/en/developer-terms/agreement-and-policy
 
 <img src="ref2sketch/result/examples/ref_sample1.jpg/sample1.jpg" width="150px"/><img src="ref2sketch/result/examples/ref_sample2.jpg/sample1.jpg" width="150px"/><img src="ref2sketch/result/examples/ref_sample3.jpg/sample1.jpg" width="150px"/><img src="ref2sketch/result/examples/ref_sample4.jpg/sample1.jpg" width="150px"/>
 
-<img src="ref2sketch/result/examples/ref_sample1.jpg/sample4.jpg" width="300px"/><img src="ref2sketch/result/examples/ref_sample2.jpg/sample4.jpg" width="300px"/>
-
-<img src="ref2sketch/result/examples/ref_sample3.jpg/sample4.jpg" width="300px"/><img src="ref2sketch/result/examples/ref_sample4.jpg/sample4.jpg" width="300px"/>
+<img src="ref2sketch/result/examples/ref_sample1.jpg/sample4.jpg" width="150"/><img src="ref2sketch/result/examples/ref_sample2.jpg/sample4.jpg" width="150px"/><img src="ref2sketch/result/examples/ref_sample3.jpg/sample4.jpg" width="150px"/><img src="ref2sketch/result/examples/ref_sample4.jpg/sample4.jpg" width="150px"/>
 
 ---
