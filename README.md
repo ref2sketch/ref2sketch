@@ -1,4 +1,6 @@
 ## Reference based sketch extraction via attention mechanism
+<img src="ref2sketch/figures/teasors.JPG" width="900px"/>
+
 
 This is official implementation of the paper "Reference based sketch extraction via attention mechanism"
 
@@ -7,8 +9,8 @@ This is official implementation of the paper "Reference based sketch extraction 
 
 
 Journal: ACM TOG
-
 Conference: SIGGRAPH ASIA 2022
+
 
         
 ## Train
