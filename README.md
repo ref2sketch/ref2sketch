@@ -68,4 +68,17 @@ https://developer.twitter.com/en/developer-terms/agreement-and-policy
     
     #Paired input and groundtruth should have same filename
 
+## Examples
+<img src="ref2sketch/result/examples/ref_sample1.jpg/sample2.jpg" width="300px"/><img src="ref2sketch/result/examples/ref_sample2.jpg/sample2.jpg" width="300px"/>
+
+<img src="ref2sketch/result/examples/ref_sample3.jpg/sample2.jpg" width="300px"/><img src="ref2sketch/result/examples/ref_sample4.jpg/sample2.jpg" width="300px"/>
+
+<img src="ref2sketch/result/examples/ref_sample1.jpg/sample7.jpg" width="150px"/><img src="ref2sketch/result/examples/ref_sample2.jpg/sample7.jpg" width="150px"/><img src="ref2sketch/result/examples/ref_sample3.jpg/sample7.jpg" width="150px"/><img src="ref2sketch/result/examples/ref_sample4.jpg/sample7.jpg" width="150px"/>
+
+<img src="ref2sketch/result/examples/ref_sample1.jpg/sample1.jpg" width="150px"/><img src="ref2sketch/result/examples/ref_sample2.jpg/sample1.jpg" width="150px"/><img src="ref2sketch/result/examples/ref_sample3.jpg/sample1.jpg" width="150px"/><img src="ref2sketch/result/examples/ref_sample4.jpg/sample1.jpg" width="150px"/>
+
+<img src="ref2sketch/result/examples/ref_sample1.jpg/sample4.jpg" width="300px"/><img src="ref2sketch/result/examples/ref_sample2.jpg/sample4.jpg" width="300px"/>
+
+<img src="ref2sketch/result/examples/ref_sample3.jpg/sample4.jpg" width="300px"/><img src="ref2sketch/result/examples/ref_sample4.jpg/sample4.jpg" width="300px"/>
+
 ---
