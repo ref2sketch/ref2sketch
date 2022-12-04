@@ -5,7 +5,7 @@
 This is official implementation of the paper **"Reference based sketch extraction via attention mechanism"**
 
 
-[PAPER] (To be appear)
+[PAPER](https://dl.acm.org/doi/10.1145/3550454.3555504)
 
 
 Journal: ACM TOG\
