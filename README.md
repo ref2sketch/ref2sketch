@@ -20,7 +20,7 @@ Conference: SIGGRAPH ASIA 2022
                      --dir_data ./datasets \
                      --dir_log ./log \
                      --dir_checkpoint ./checkpoint \
-                     --direction A2B
+                     --direction a2b
                      --gpu_ids 0
 
 * For settings from original paper, use 'train' for --mode. However we recommend to use 'train_deep' for producing better quality of model with deeper convolution layers.
