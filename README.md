@@ -30,7 +30,7 @@ Conference: SIGGRAPH ASIA 2022
 ## Test
     $ python test.py --name_weight [weight_file] \
                      --name_data examples \
-                     --direction A2B \
+                     --direction a2b \
                      --cuda
 
 * Download the pretrained model from google drive
