@@ -4,6 +4,7 @@
 
 This is official implementation of the paper **"Reference based sketch extraction via attention mechanism"**
 
+Amirsaman Ashtari*, Chang Wook Seo*, Cholmin Kang, Sihun Cha, Junyong Noh (*equally contributed and listed alphabetically)
 
 [PAPER](https://dl.acm.org/doi/10.1145/3550454.3555504)
 
